@@ -1,0 +1,15 @@
+*.orig
+*.rej
+*~
+.svn
+*.elc
+.git
+.bzr
+semantic.cache
+CVS
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+tmp/*
+/etc/TODO

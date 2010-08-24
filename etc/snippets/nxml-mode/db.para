@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: para
+# key: para
+# condition: (string-match "docbook" rng-current-schema-file-name)
+# --
+<para>$0</para>

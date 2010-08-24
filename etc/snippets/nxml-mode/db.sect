@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: section
+# key: sect
+# condition: (string-match "docbook" rng-current-schema-file-name)
+# --
+<section>
+<title>$1</title>
+$0
+</section>
