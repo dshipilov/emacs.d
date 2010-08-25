@@ -31,4 +31,13 @@
 (add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
 
 (defun ds/fsharp-mode-hook () t)
-(ds/add-prog-hook 'fsharp-mode 'ds/fsharp-mode-hook)
+(ds/add-prog-hook 'fsharp-mode-hook 'ds/fsharp-mode-hook)
+
+;; haskell-mode
+(load "haskell-site-file")
+
+(defun ds/haskell-mode-hook ()
+  (turn-on-haskell-doc-mode)
+  (turn-on-haskell-identation))
+
+(ds/add-prog-hook 'haskell-mode-hook 'ds/haskell-mode-hook)
