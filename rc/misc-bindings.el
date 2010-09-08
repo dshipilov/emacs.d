@@ -14,12 +14,31 @@
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 
+;; fast buffer switching
+(define-key global-map (kbd "C-<f1>")
+  (lambda ()
+    (interactive)
+    (switch-to-buffer "*scratch*")))
+
+(define-key global-map (kbd "C-<f12>")
+  (lambda ()
+    (interactive)
+    (let ((buf (dired user-emacs-directory)))
+      (with-current-buffer buf
+        (dired-insert-subdir "rc")))))
+
+(define-key global-map (kbd "M-<f12>")
+  (lambda ()
+    (interactive)
+    (dired default-directory)))
+
 (define-key global-map (kbd "C-m") 'newline-and-indent)
+
 (define-key global-map [C-return] 'hippie-expand)
 
 (define-key minibuffer-local-map [C-return]
   (lambda ()
-    (interactive)   
+    (interactive)
     (let*
         ((b (window-buffer (minibuffer-selected-window)))
          (fname (buffer-file-name b))

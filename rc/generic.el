@@ -1,4 +1,4 @@
-;;; generic.el --- emacs packages configuration
+9;;; generic.el --- emacs packages configuration
 ;;
 ;; Author: Denis Shipilov <denis.shipilov@gmail.com>
 ;;
@@ -41,9 +41,25 @@
   ido-enable-last-directory-history t
   ido-save-directory-list-file (ds/profile-item "tmp/ido-history"))
 
+;; dired
+(setq dired-recursive-copies 'always
+      dired-recursive-deletes 'top
+      dired-dwim-target t)
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key dired-mode-map (kbd "<return>")
+              'dired-find-alternate-file)
+            (define-key dired-mode-map (kbd "a")
+              'dired-advertised-find-file)
+            (define-key dired-mode-map (kbd "^")
+              (lambda ()
+                (interactive)
+                (find-alternate-file "..")))))
+
 ;; misc settings
 (setq
-  default-major-mode 'text-mode
-  initial-scratch-message ";; try some elisp code here\n\n"
-  kill-whole-line t
-  require-final-newline t)
+ default-major-mode 'text-mode
+ initial-scratch-message ";; try some elisp code here\n\n"
+ kill-whole-line t
+ require-final-newline t)
