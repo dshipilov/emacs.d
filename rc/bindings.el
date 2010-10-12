@@ -1,4 +1,4 @@
-;;; misc-bindings.el -- miscilleneous key bindings
+;;; bindings.el -- miscilleneous key bindings
 ;;
 ;; Author: Denis Shipilov <denis.shipilov@gmail.com>
 ;;
@@ -13,6 +13,12 @@
 ;; font size
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
+
+;; ibuffer
+(define-key global-map (kbd "C-`") 'ibuffer)
+(add-hook 'ibuffer-hook
+          (lambda ()
+            (define-key ibuffer-mode-map (kbd "C-`") 'ibuffer-quit)))
 
 ;; fast buffer switching
 (define-key global-map (kbd "C-<f1>")

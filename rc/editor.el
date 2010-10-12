@@ -1,4 +1,4 @@
-9;;; generic.el --- emacs packages configuration
+;;; editor.el --- emacs editing configuration
 ;;
 ;; Author: Denis Shipilov <denis.shipilov@gmail.com>
 ;;
@@ -17,10 +17,6 @@
 ;; ibuffer
 (require 'ibuffer)
 
-(define-key global-map (kbd "C-`") 'ibuffer)
-(add-hook 'ibuffer-hook
-          (lambda ()
-            (define-key ibuffer-mode-map (kbd "C-`") 'ibuffer-quit)))
 (setq
   ibuffer-default-shrink-to-minimum-size t)
 

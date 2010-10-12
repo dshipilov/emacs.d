@@ -57,8 +57,3 @@
 
 (defconst ds/cyrillic-coding-systems
   (list 'iso-8859-5 'koi8-r 'cp866 'windows-1251))
-
-(defvar ds/bin-path-list nil)
-
-(defun ds/pack-path-list (paths-list &optional skip-leading-separator)
-  "")

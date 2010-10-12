@@ -26,19 +26,12 @@
 (defun ds/elisp-files (dir &optional full)
   (directory-files dir full "\\.elc?$"))
 
-;; rc scripts list
-(defconst ds/rc-scripts
-  '("defs"
-    "generic"
-    "misc-bindings"
-    "text-modes"
-    "prog-modes"
-    "snippets"
-    "platform"))
-
-;; direct customizations into separate file
-(setq custom-file (ds/profile-item "settings.el"))
-(load custom-file 'noerror)
+;; important rc scripts
+(defconst ds/rc-main
+  '("common-defs.el"
+    "common-prog.el"
+    "editor.el")
+  "Important startup scripts")
 
 ;; setup load path
 (ds/prepend-load-path
@@ -54,4 +47,29 @@
         (let
             ((rc-file (ds/profile-item (concat "rc/" entry))))
           (load (file-name-sans-extension rc-file) t)))
-      ds/rc-scripts)
+      (delete-duplicates
+       (append ds/rc-main (ds/elisp-files (ds/profile-item "rc/")))))
+
+;; direct customizations into separate file
+(setq custom-file (ds/profile-item "settings.el"))
+(load custom-file 'noerror)
+
+;; yet another file for machine-specific customizations
+(defvar machine-custom-file
+  (let* ((sys-name (downcase (system-name)))
+         (host-name
+          (progn
+            (string-match "\\([^.]+\\)" sys-name)
+            (match-string 1 sys-name)))
+         (os-name
+          (case system-type
+            ('windows-nt 'cygwin "winnt")
+            ('gnu/linux "linux")
+            ('darwin "macos")
+            (otherwise "unix"))))
+    (ds/profile-item (format "%s-%s-settings.el"
+                             host-name os-name)))
+  "Host specific customizations (like application paths) are
+kept in separate files")
+
+(load machine-custom-file 'noerror)
