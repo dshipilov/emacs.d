@@ -50,13 +50,16 @@
       (delete-duplicates
        (append ds/rc-main (ds/elisp-files (ds/profile-item "rc/")))))
 
-;; direct customizations into separate file
+;; direct customizations into separate files
 (setq custom-file (ds/profile-item "settings.el"))
-(load custom-file 'noerror)
+
+(defvar customization-files
+  (list custom-file)
+  "Customization target alternatives")
 
 ;; yet another file for machine-specific customizations
-(defvar machine-custom-file
-  (let* ((sys-name (downcase (system-name)))
+(add-to-list 'customization-files
+ (let* ((sys-name (downcase (system-name)))
          (host-name
           (progn
             (string-match "\\([^.]+\\)" sys-name)
@@ -69,7 +72,9 @@
             (otherwise "unix"))))
     (ds/profile-item (format "%s-%s-settings.el"
                              host-name os-name)))
-  "Host specific customizations (like application paths) are
-kept in separate files")
+ t)
 
-(load machine-custom-file 'noerror)
+;; load customization files in order
+(mapc (lambda (file)
+        (load file 'noerror))
+      customization-files)
