@@ -51,10 +51,8 @@
        (append ds/rc-main (ds/elisp-files (ds/profile-item "rc/")))))
 
 ;; direct customizations into separate files
-(setq custom-file (ds/profile-item "settings.el"))
-
 (defvar customization-files
-  (list custom-file)
+  (list "settings.el")
   "Customization target alternatives")
 
 ;; yet another file for machine-specific customizations
@@ -70,11 +68,14 @@
             ('gnu/linux "linux")
             ('darwin "macos")
             (otherwise "unix"))))
-    (ds/profile-item (format "%s-%s-settings.el"
-                             host-name os-name)))
+   (format "%s-%s-settings.el"
+           host-name os-name))
  t)
+
+;; default target
+(setq custom-file (car customization-files))
 
 ;; load customization files in order
 (mapc (lambda (file)
-        (load file 'noerror))
+        (load (ds/profile-item file) 'noerror))
       customization-files)
