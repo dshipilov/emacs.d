@@ -79,3 +79,5 @@
 (mapc (lambda (file)
         (load (ds/profile-item file) 'noerror))
       customization-files)
+
+(put 'dired-find-alternate-file 'disabled nil)

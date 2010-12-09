@@ -1,4 +1,4 @@
-;;; defs.el --- utility definitions
+;;; common-defs.el --- utility definitions
 ;;
 ;; Author: Denis Shipilov <denis.shipilov@gmail.com>
 ;;
@@ -6,14 +6,32 @@
 (defun ds/init-reload ()
   "Reload emacs configuration."
   (interactive)
-  (progn
-    (setq debug-on-error t)
+  (let ((debug-on-error t))
     (load (ds/profile-item "init"))))
+
+(defun ds/load-machine-settings ()
+  (let ((machine-settings
+         (format "%s-%s"
+                 (let (sys-name (downcase (system-name)))
+                   (progn
+                     (string-match "\\([^.]+\\)" sys-name)
+                     (match-string 1 sys-name)))
+                 (case system-type
+                   ('windows-nt 'cygwin "winnt")
+                   ('gnu/linux "linux")
+                   ('darwin "macos")
+                   (otherwise "unix"))
+                 ))))
+  machine-settings
+  )
+
+(defun ds/edit-machine-settings ()
+  )
 
 (defalias 'ini 'ds/init-reload)
 
 (defun ds/byte-recompile ()
-  "Recompiles all elisp files in the packages directory"
+  "Recompiles all elisp files in the packages directory."
   (interactive)
   (require 'bytecomp)
   (byte-recompile-directory (ds/profile-item "packages/elpa/") 0)
