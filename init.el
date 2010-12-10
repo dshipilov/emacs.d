@@ -31,7 +31,7 @@
   '("common-defs.el"
     "common-prog.el"
     "editor.el")
-  "Important startup scripts")
+  "Important startup scripts.")
 
 ;; setup load path
 (ds/prepend-load-path
@@ -50,34 +50,11 @@
       (delete-duplicates
        (append ds/rc-main (ds/elisp-files (ds/profile-item "rc/")))))
 
-;; direct customizations into separate files
-(defvar customization-files
-  (list "settings.el")
-  "Customization target alternatives")
+;; load customizations
+(setq custom-file "settings.el")
+(load custom-file)
 
-;; yet another file for machine-specific customizations
-(add-to-list 'customization-files
- (let* ((sys-name (downcase (system-name)))
-         (host-name
-          (progn
-            (string-match "\\([^.]+\\)" sys-name)
-            (match-string 1 sys-name)))
-         (os-name
-          (case system-type
-            ('windows-nt 'cygwin "winnt")
-            ('gnu/linux "linux")
-            ('darwin "macos")
-            (otherwise "unix"))))
-   (format "%s-%s-settings.el"
-           host-name os-name))
- t)
-
-;; default target
-(setq custom-file (car customization-files))
-
-;; load customization files in order
-(mapc (lambda (file)
-        (load (ds/profile-item file) 'noerror))
-      customization-files)
+;; load machine-specific customizations
+(ds/load-machine-settings)
 
 (put 'dired-find-alternate-file 'disabled nil)

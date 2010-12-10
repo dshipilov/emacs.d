@@ -9,10 +9,21 @@
   (let ((debug-on-error t))
     (load (ds/profile-item "init"))))
 
+(defun ds/custom-make-theme-feature (theme)
+  (intern
+   (concat
+    (if (symbolp theme)
+        (symbol-name theme)
+      theme)
+    "-settings")))
+
+;; redefine with more clear suffix
+(defalias 'custom-make-theme-feature 'ds/custom-make-theme-feature)
+
 (defun ds/load-machine-settings ()
   (let ((machine-settings
          (format "%s-%s"
-                 (let (sys-name (downcase (system-name)))
+                 (let ((sys-name (downcase (system-name))))
                    (progn
                      (string-match "\\([^.]+\\)" sys-name)
                      (match-string 1 sys-name)))
@@ -21,9 +32,8 @@
                    ('gnu/linux "linux")
                    ('darwin "macos")
                    (otherwise "unix"))
-                 ))))
-  machine-settings
-  )
+                 )))
+    machine-settings))
 
 (defun ds/edit-machine-settings ()
   )
