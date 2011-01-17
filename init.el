@@ -51,7 +51,7 @@
        (append ds/rc-main (ds/elisp-files (ds/profile-item "rc/")))))
 
 ;; load customizations
-(setq custom-file "settings.el")
+(setq custom-file (ds/profile-item "settings.el"))
 (load custom-file)
 
 ;; load machine-specific customizations
