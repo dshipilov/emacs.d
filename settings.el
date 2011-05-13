@@ -11,6 +11,7 @@
  '(backup-directory-alist (\` (("." \, (ds/profile-item "tmp/backups")))))
  '(blink-cursor-mode nil)
  '(calendar-week-start-day 1)
+ '(directory-abbrev-alist (quote (("^@" . "sudo:root@localhost:"))))
  '(display-time-24hr-format t)
  '(display-time-load-average nil t)
  '(display-time-mode t)
@@ -30,4 +31,12 @@
  '(tooltip-mode nil)
  '(transient-mark-mode t)
  '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
- '(uniquify-strip-common-suffix t))
+ '(uniquify-strip-common-suffix t)
+ '(x-select-enable-clipboard t)
+ )
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )

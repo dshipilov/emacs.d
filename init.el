@@ -30,6 +30,7 @@
 (defconst ds/rc-main
   '("common-defs.el"
     "common-prog.el"
+    "faces.el"
     "editor.el")
   "Important startup scripts.")
 
@@ -39,6 +40,10 @@
 
 ;; initialize elpa packages
 (setq package-user-dir (ds/profile-item "packages/elpa"))
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+
 (when (require 'package "package.el")
   (package-initialize))
 
@@ -55,6 +60,6 @@
 (load custom-file)
 
 ;; load machine-specific customizations
-(ds/load-machine-settings)
+(load ds/machine-settings-name t)
 
 (put 'dired-find-alternate-file 'disabled nil)

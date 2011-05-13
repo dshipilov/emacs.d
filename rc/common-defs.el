@@ -20,23 +20,35 @@
 ;; redefine with more clear suffix
 (defalias 'custom-make-theme-feature 'ds/custom-make-theme-feature)
 
-(defun ds/load-machine-settings ()
-  (let ((machine-settings
-         (format "%s-%s"
-                 (let ((sys-name (downcase (system-name))))
-                   (progn
-                     (string-match "\\([^.]+\\)" sys-name)
-                     (match-string 1 sys-name)))
-                 (case system-type
-                   ('windows-nt 'cygwin "winnt")
-                   ('gnu/linux "linux")
-                   ('darwin "macos")
-                   (otherwise "unix"))
-                 )))
-    machine-settings))
-
-(defun ds/edit-machine-settings ()
+(defconst ds/machine-settings-name
+  (format "%s-%s"
+          (let ((sys-name (downcase (system-name))))
+            (progn
+              (string-match "\\([^.]+\\)" sys-name)
+              (match-string 1 sys-name)))
+          (case system-type
+            ('windows-nt 'cygwin "winnt")
+            ('gnu/linux "linux")
+            ('darwin "macos")
+            (otherwise "unix"))
+          )
+  "Name of the elisp file with machine-specific customizations."
   )
+
+;; (defun ds/edit-or-create-settings-file (name)
+;;   "Modify specified settings file."
+;;     (interactive)
+;;     (switch-to-buffer (generate-new-buffer (format "* %s *" name)))
+;;     (let ((inhibit-read-only t))
+;;       (erase-buffer))
+;;     (custom-new-theme-mode)
+;;     (make-local-variable 'custom-theme-name)
+;;     (make-local-variable 'custom-theme-variables)
+;;     (make-local-variable 'custom-theme-faces)
+;;     (make-local-variable 'custom-theme-description)
+;;     (make-local-variable 'custom-theme-insert-variable-marker)
+;;     (make-local-variable 'custom-theme-insert-face-marker)
+;;     )
 
 (defalias 'ini 'ds/init-reload)
 

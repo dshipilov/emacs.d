@@ -7,7 +7,7 @@
 (defun ds/elisp-mode-hook ()
   (eldoc-mode 1)
   (auto-fill-mode 1)
-  (paredit-mode 1)
+  ;;(enable-paredit-mode 1)
   (setq tab-width 2))
 (ds/add-prog-hook 'emacs-lisp-mode-hook 'ds/elisp-mode-hook)
 
@@ -30,6 +30,6 @@
 
 (defun ds/haskell-mode-hook ()
   (turn-on-haskell-doc-mode)
-  (turn-on-haskell-identation))
+  (turn-on-haskell-indentation))
 
 (ds/add-prog-hook 'haskell-mode-hook 'ds/haskell-mode-hook)

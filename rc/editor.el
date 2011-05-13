@@ -59,3 +59,16 @@
  initial-scratch-message ";; try some elisp code here\n\n"
  kill-whole-line t
  require-final-newline t)
+
+;; tweaks to simplify editing files with local root permissions
+(defconst ds/tramp-root-file-prefix "/sudo:root@localhost:")
+(defvar ds/root-editing-mode nil)
+
+;; (add-hook 'find-file-hook
+;;           (lambda ()
+;;             (if (string-match
+;;                  (concat "^" ds/tramp-root-file-prefix) buffer-file-name)
+;;                 (face-remap-set-base 'mode-line 'ds/mode-line-root-mode)
+;;                 )
+
+;;             ))
