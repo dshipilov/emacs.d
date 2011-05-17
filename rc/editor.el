@@ -53,6 +53,8 @@
                 (interactive)
                 (find-alternate-file "..")))))
 
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;; misc settings
 (setq
  default-major-mode 'text-mode
@@ -70,5 +72,4 @@
 ;;                  (concat "^" ds/tramp-root-file-prefix) buffer-file-name)
 ;;                 (face-remap-set-base 'mode-line 'ds/mode-line-root-mode)
 ;;                 )
-
 ;;             ))

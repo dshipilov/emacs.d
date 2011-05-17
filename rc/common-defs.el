@@ -3,6 +3,21 @@
 ;; Author: Denis Shipilov <denis.shipilov@gmail.com>
 ;;
 
+(require 'cl)
+
+(defsubst ds/prepend-load-path (path-list)
+  (setq load-path (append path-list load-path)))
+
+(defun ds/scan-directories (dir filter)
+  (append
+   (if (funcall filter dir) (list dir))
+   (reduce (lambda (acc elm)
+             (append acc
+                     (if (file-directory-p elm)
+                         (ds/scan-directories elm filter))))
+           (directory-files dir t "\\w[a-zA-Z0-9.-]*$")
+           :initial-value nil)))
+
 (defun ds/init-reload ()
   "Reload emacs configuration."
   (interactive)

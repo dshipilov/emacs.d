@@ -12,4 +12,6 @@ GRTAGS
 GSYMS
 GTAGS
 tmp/*
+packages/elpa/*
+packages/site-lisp/*
 /etc/TODO

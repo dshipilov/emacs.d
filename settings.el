@@ -29,11 +29,11 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
+ '(tramp-persistency-file-name "/home/denis/.emacs.d/tmp/tramp")
  '(transient-mark-mode t)
  '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
  '(uniquify-strip-common-suffix t)
- '(x-select-enable-clipboard t)
- )
+ '(x-select-enable-clipboard t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.

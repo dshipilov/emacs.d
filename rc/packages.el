@@ -4,7 +4,7 @@
 
 ;; el-get
 (add-to-list 'load-path (ds/profile-item "packages/el-get"))
-(setq el-get-dir (ds/profile-item "packages/"))
+(setq el-get-dir (ds/profile-item "packages/site-lisp"))
 (setq el-get-sources
       '(clojure-mode
         paredit

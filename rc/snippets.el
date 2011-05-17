@@ -3,7 +3,7 @@
 ;; Author: Denis Shipilov <denis.shipilov@gmail.com>
 ;;
 
-(when (require 'yasnippet)
+(when (require 'yasnippet nil t)
   (defconst ds/templates-root (ds/profile-item "etc/templates"))
 
   (setq

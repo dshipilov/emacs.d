@@ -26,10 +26,9 @@
 (ds/add-prog-hook 'fsharp-mode-hook 'ds/fsharp-mode-hook)
 
 ;; haskell-mode
-(load "haskell-site-file")
+(when (load "haskell-site-file" t)
+  (defun ds/haskell-mode-hook ()
+    (turn-on-haskell-doc-mode)
+    (turn-on-haskell-indentation))
 
-(defun ds/haskell-mode-hook ()
-  (turn-on-haskell-doc-mode)
-  (turn-on-haskell-indentation))
-
-(ds/add-prog-hook 'haskell-mode-hook 'ds/haskell-mode-hook)
+  (ds/add-prog-hook 'haskell-mode-hook 'ds/haskell-mode-hook))
