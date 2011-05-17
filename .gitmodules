@@ -1,3 +1,3 @@
 [submodule "packages/el-get"]
-	path = packages/el-get
-	url = git@github.com:dshipilov/el-get.git
+        path = packages/el-get
+        url = git://github.com/dshipilov/emacs.d.git
