@@ -1,0 +1,3 @@
+[submodule "packages/el-get"]
+	path = packages/el-get
+	url = git@github.com:dshipilov/el-get.git
